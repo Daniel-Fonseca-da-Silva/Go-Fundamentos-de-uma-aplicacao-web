@@ -1,13 +1,24 @@
 package main
 
 import (
+	"database/sql"
 	"net/http"
 	"text/template"
 
 	_ "github.com/lib/pq"
 )
 
+func conectaComBancoDeDados() *sql.DB {
+	conexao := "user=postgres dbname=postgres password=123456 host=localhost sslmode=disable"
+	db, err := sql.Open("postgres", conexao)
+	if err != nil {
+		panic(err.Error())
+	}
+	return db
+}
+
 type Produto struct {
+	Id         int
 	Nome       string
 	Descricao  string
 	Preco      float64
@@ -22,15 +33,36 @@ func main() {
 }
 
 func index(w http.ResponseWriter, r *http.Request) {
-	produtos := []Produto{
-		{Nome: "Relógio ourax", Descricao: "Super moderno e elegante", Preco: 13299.99, Quantidade: 15},
-		{"Teclado Jumpo", "Teclado por ondas radionicas", 59.99, 851},
-		{"Video game grudano", "Super video game perca vida real", 89.99, 551},
-		{"Fonte potente nanomax", "Super fonte para nave espacial", 885.99, 125},
-		{"Espada alienigena da era antiga", "Espada encontrada no planeta zapio", 1359.99, 2},
-		{"Esqueleto de humanoides 2022", "Esqueleto humanoide usado para hologramar", 359.99, 155},
-		{"Pistola de dupla materia 2055", "Super pistola com disparo quadriplo ou triplo", 3285.74, 78},
+	db := conectaComBancoDeDados()
+
+	selectDeTodosOsProdutos, err := db.Query("SELECT * FROM produtos")
+	if err != nil {
+		panic(err.Error())
 	}
+
+	p := Produto{}
+	produtos := []Produto{}
+
+	for selectDeTodosOsProdutos.Next() {
+		var id, quantidade int
+		var nome, descricao string
+		var preco float64
+
+		err = selectDeTodosOsProdutos.Scan(&id, &nome, &descricao, &preco, &quantidade)
+		if err != nil {
+			panic(err.Error())
+		}
+
+		p.Nome = nome
+		p.Descricao = descricao
+		p.Preco = preco
+		p.Quantidade = quantidade
+
+		produtos = append(produtos, p)
+
+	}
+
 	temp.ExecuteTemplate(w, "Index", produtos)
+	defer db.Close()
 
 }

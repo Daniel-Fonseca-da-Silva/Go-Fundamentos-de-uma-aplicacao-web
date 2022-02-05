@@ -3,6 +3,8 @@ package main
 import (
 	"net/http"
 	"text/template"
+
+	_ "github.com/lib/pq"
 )
 
 type Produto struct {

@@ -1,0 +1,26 @@
+Para servidor postgres
+sudo service postgresql stop
+
+Para servidor mysql
+sudo service mysql stop
+
+Baixa imagem do dockerhub
+docker pull postgres
+
+verifica instalação
+docker images
+
+Cria container do Postgres
+sudo docker run --name sigabem-db -p 5432:5432 -e POSTGRES_PASSWORD=12345 -d postgres
+
+Verifica container usado
+docker docker ps
+
+Para Banco de dados
+docker container stop sigabem-db
+
+Inicia Banco de dados
+docker container stop sigabem-db
+
+Deleta imagem(cuidado!)
+docker container rm sigabem-db

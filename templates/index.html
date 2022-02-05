@@ -31,18 +31,14 @@
             </tr>
           </thead>
           <tbody>
+            {{range .}}
             <tr>
-              <td>Super processador Terrano</td>
-              <td>Processador com siliciano marciano banhado em zetano</td>
-              <td>759.99</td>
-              <td>5525</td>
+              <td>{{.Nome}}</td>
+              <td>{{.Descricao}}</td>
+              <td>{{.Preco}}</td>
+              <td>{{.Quantidade}}</td>
             </tr>
-            <tr>
-              <td>NetBook do planeta Chormo</td>
-              <td>NetBook via lactea</td>
-              <td>551.99</td>
-              <td>1050</td>
-            </tr>
+            {{end}}
           </tbody>
         </table>
       </div>

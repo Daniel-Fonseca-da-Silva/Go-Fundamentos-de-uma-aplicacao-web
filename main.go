@@ -1,21 +1,10 @@
 package main
 
 import (
-	"database/sql"
+	"daniel/db"
 	"net/http"
 	"text/template"
-
-	_ "github.com/lib/pq"
 )
-
-func conectaComBancoDeDados() *sql.DB {
-	conexao := "user=postgres dbname=postgres password=123456 host=localhost sslmode=disable"
-	db, err := sql.Open("postgres", conexao)
-	if err != nil {
-		panic(err.Error())
-	}
-	return db
-}
 
 type Produto struct {
 	Id         int
@@ -33,7 +22,7 @@ func main() {
 }
 
 func index(w http.ResponseWriter, r *http.Request) {
-	db := conectaComBancoDeDados()
+	db := db.ConectaComBancoDeDados()
 
 	selectDeTodosOsProdutos, err := db.Query("SELECT * FROM produtos")
 	if err != nil {

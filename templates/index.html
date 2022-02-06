@@ -19,6 +19,7 @@
 
 <body>
   <div class="container">
+    <h1 class="text-center">Produtos atuais no sistema</h1>
     <section class="card">
       <div>
         <table class="table table-striped table-hover mb-0">
@@ -37,7 +38,7 @@
               <td>{{.Descricao}}</td>
               <td>{{.Preco}}</td>
               <td>{{.Quantidade}}</td>
-              <td><a href="/delete?id={{.Id}}"class="btn btn-danger">Deletar</a></td>
+              <td><button onclick="onDelete('{{.Id}}')" class="btn btn-danger">Deletar</button></td>
             </tr>
             {{end}}
           </tbody>
@@ -49,6 +50,15 @@
     </div>
   </div>
 </body>
+
+<script>
+  function onDelete(id) {
+    let resposta = confirm("Deseja realmente deletar esse produto?")
+    if (resposta) {
+      window.location = "/delete?id=" + id
+    }
+  }
+</script>
 
 </html>
 {{end}}

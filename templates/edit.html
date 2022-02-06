@@ -3,49 +3,49 @@
 {{template "_menu"}}
 
 <body>
-<div class="jumbotron jumbotron-fluid">
-    <div class="container">
-        <h1 class="display-5 text-center">Atualização de produtos</h1>
-        <p class="lead text-center">Insira os detalhes para atualizar um produto</p>
-    </div>
-</div>
-<form method="POST" action="insert" class="center">
-    <div class="row">
-        <div class="col-sm-8">
-            <div class="form-group">
-                <label for="nome">Nome:</label>
-                <input type="text" name="nome" class="form-control">
-            </div>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-5 text-center">Atualização de produtos</h1>
+            <p class="lead text-center">Insira os detalhes para atualizar um produto</p>
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-8">
-            <div class="form-group">
-                <label for="descricao">Descrição:</label>
-                <input type="text" name="descricao" class="form-control">
+    <form method="POST" action="insert" class="center">
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="form-group">
+                    <label for="nome">Nome:</label>
+                    <input type="text" name="nome" class="form-control" value="{{.Nome}}">
+                </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-2">
-            <div class="form-group">
-                <label for="preco">Preço:</label>
-                <input type="number" name="preco" class="form-control" step="0.01">
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="form-group">
+                    <label for="descricao">Descrição:</label>
+                    <input type="text" name="descricao" class="form-control" value="{{.Descricao}}">
+                </div>
             </div>
         </div>
-    </div>
+        <div class="row">
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <label for="preco">Preço:</label>
+                    <input type="number" name="preco" class="form-control" step="0.01" value="{{.Preco}}">
+                </div>
+            </div>
+        </div>
 
-    <div class="row">
-        <div class="col-sm-2">
-            <div class="form-group">
-                <label for="quantidade">Quantidade:</label>
-                <input type="number" name="quantidade" class="form-control">
+        <div class="row">
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <label for="quantidade">Quantidade:</label>
+                    <input type="number" name="quantidade" class="form-control" value="{{.Quantidade}}">
+                </div>
             </div>
         </div>
-    </div>
-    <button type="submit" value="salvar" class="btn btn-success">Atualizar</button>
-    <a class="btn btn-info" href="/product">Voltar</a>
-</form>
+        <button type="submit" value="salvar" class="btn btn-success">Atualizar</button>
+        <a class="btn btn-info" href="/product">Voltar</a>
+    </form>
 </body>
 
 </html>
